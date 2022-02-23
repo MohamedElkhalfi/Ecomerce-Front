@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <table class="table table-bordered" *ngIf="state">
+        <thead>
+        <tr>
+          <th scope="col">ID</th><th scope="col">Name</th><th scope="col">Price</th ><th scope="col">Quantity</th><th scope="col">Selected</th><th scope="col">Available</th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-productsItem *ngFor="let product of  state.products  " [product]="product" style="display: contents"></app-productsItem>
+        </tbody>
+      </table>
+     </div>
+    </div>
+
+
+     </div>
+
+
