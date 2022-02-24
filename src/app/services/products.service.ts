@@ -17,9 +17,6 @@ getAllProducts() : Observable<Product[]> {
 }
 
 getSelectedProducts(product:Product):Observable<Product[]>{
-  console.log("getSelectedProducts " + JSON.stringify(product));
-  console.log("getSelectedProducts " + JSON.stringify(product.selected));
-
   let selected=!product.selected;
   return this.http.get<Product[]>(`${this.host}/api/UpdateProductSelected?idProduct=${product.id}&selected=${selected}`, {
     headers: new HttpHeaders({
@@ -38,6 +35,10 @@ deleteProduct(product: Product): Observable<void> {
 
   });
 
+}
+
+getProductsByKeyword(keyword: string) : Observable<Product[]> {
+  return this.http.get<Product[]>(this.host+"/api/FindProductsByName?keyword="+keyword);
 }
 
 // save(product:Product):Observable<Product>{

@@ -5,7 +5,7 @@ import {Action} from '@ngrx/store';
 import { ProductsService } from "../services/products.service";
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 
-import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, ProductsActions, ProductsActionsTypes } from "./products.action";
+import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductsActionSuccess, ProductsActions, ProductsActionsTypes, SearchProductsActionError, SearchProductsActionSuccess } from "./products.action";
 
 @Injectable()
 export class ProductsEffects {
@@ -42,5 +42,28 @@ export class ProductsEffects {
   )
 );
 
+ /* Search Products*/
+ SearchProductsEffect:Observable<ProductsActions>=createEffect(
+  ()=>this.effectActions.pipe(
+    ofType(ProductsActionsTypes.SEARCH_PRODUCTS),
+    mergeMap((action: ProductsActions)=>{
+      return this.productService.getProductsByKeyword( action.payload)
+        .pipe(
+          map((prodcuts)=> new SearchProductsActionSuccess(prodcuts)),
+          catchError((err)=>of(new SearchProductsActionError(err.message)))
+        )
+    })
+  )
+);
+
+ /* Search Products*/
+ NewProductsEffect:Observable<ProductsActions>=createEffect(
+  ()=>this.effectActions.pipe(
+    ofType(ProductsActionsTypes.New_PRODUCTS),
+    map((action: ProductsActions)=>{
+      return new NewProductsActionSuccess({});
+    })
+  )
+);
 
 }

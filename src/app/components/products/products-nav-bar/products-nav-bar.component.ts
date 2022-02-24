@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {catchError, map, Observable, of, startWith} from 'rxjs';
 import { Product } from 'src/app/model/prodcut.module';
-import { GetAllProductsAction, GetSelectedProductsAction } from 'src/app/ngrx/products.action';
+import { GetAllProductsAction, GetSelectedProductsAction, SearchroductsAction } from 'src/app/ngrx/products.action';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products-nav-bar.component.css']
 })
 export class ProductsNavBarComponent implements OnInit {
-  constructor(private store:Store<any>) { }
+  constructor(private store:Store<any>, private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +22,12 @@ export class ProductsNavBarComponent implements OnInit {
     this.store.dispatch(new GetAllProductsAction({}));
 
   }
+  onSearch(f: any) {
+    this.store.dispatch(new SearchroductsAction(f.keyword));
+  }
 
-
+  onNewProduct()
+  {
+this.route.navigateByUrl("/newProduct");
+  }
 }

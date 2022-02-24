@@ -7,7 +7,9 @@ export enum ProductsStateEnum{
   LOADING="Loading",
   LOADED="Loaded",
   ERROR="Error",
-  INITIAL="Initial"
+  INITIAL="Initial",
+  NEW= "New",
+  EDIT="Edit"
 }
 
 export interface ProductsState{
@@ -38,6 +40,22 @@ export function productsReducer(state=initState, action:Action):ProductsState {
       return {...state, dataState:ProductsStateEnum.LOADED, products:(<ProductsActions>action).payload}
     case ProductsActionsTypes.GET_SELECTED_PRODUCTS_ERROR:
       return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+   /* Search Products*/
+    case ProductsActionsTypes.SEARCH_PRODUCTS:
+      return {...state, dataState:ProductsStateEnum.LOADING }
+    case ProductsActionsTypes.SEARCH_PRODUCTS_SUCCESS:
+      return {...state, dataState:ProductsStateEnum.LOADED, products:(<ProductsActions>action).payload}
+    case ProductsActionsTypes.GET_SELECTED_PRODUCTS_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
+         /* New Products*/
+    case ProductsActionsTypes.New_PRODUCTS:
+      return {...state, dataState:ProductsStateEnum.LOADING }
+    case ProductsActionsTypes.New_PRODUCTS_SUCCESS:
+      return {...state, dataState:ProductsStateEnum.NEW }
+    case ProductsActionsTypes.New_PRODUCTS_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
     default : return {...state}
   }
 }

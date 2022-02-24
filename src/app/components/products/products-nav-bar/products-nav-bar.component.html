@@ -9,12 +9,12 @@
         <button (click)="onGetAllProducts()" class="btn btn-sm btn-outline-info ml-2">All</button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-sm btn-outline-info ml-2">New</button>
+        <button (click)="onNewProduct()" class="btn btn-sm btn-outline-info ml-2">New</button>
       </li>
 
     </ul>
     <form class="form-inline my-2 my-lg-0" #f="ngForm" (ngSubmit)="onSearch(f.value)">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" ngModel name="key">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" ngModel name="keyword">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
