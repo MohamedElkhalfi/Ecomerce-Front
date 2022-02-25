@@ -30,7 +30,12 @@ export enum ProductsActionsTypes{
      /* Save products*/
      DELETE_PRODUCTS="[Products] DELETE products",
      DELETE_PRODUCTS_SUCCESS="[Products] DELETE products Success",
-     DELETE_PRODUCTS_ERROR="[Products] DELETE products Error"
+     DELETE_PRODUCTS_ERROR="[Products] DELETE products Error",
+
+      /* Edit products*/
+      EDIT_PRODUCTS ="[Products] EDIT_PRODUCTS products",
+      EDIT_PRODUCTS_SUCCESS ="[Products] EDIT_PRODUCTS products Success",
+      EDIT_PRODUCTS_ERROR ="[Products] EDIT_PRODUCTS products Error"
   }
 
 
@@ -151,11 +156,32 @@ export class DeleteProductsActionError implements Action{
   constructor(public payload:string) {
   }
 }
+
+/* Edit Products Actions*/
+export class EditProductsAction implements Action{
+  type: ProductsActionsTypes=ProductsActionsTypes.EDIT_PRODUCTS;
+  constructor(public  payload:number ) {
+  }
+}
+
+export class EditProductsActionSuccess implements Action{
+  type: ProductsActionsTypes=ProductsActionsTypes.EDIT_PRODUCTS_SUCCESS;
+  constructor(public  payload:Product ) {
+  }
+
+}
+
+export class EditProductsActionError implements Action{
+  type: ProductsActionsTypes=ProductsActionsTypes.EDIT_PRODUCTS_ERROR;
+  constructor(public payload:string) {
+  }
+}
 export type ProductsActions=
     GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError|
     GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError |
     SearchroductsAction | SearchProductsActionSuccess | SearchProductsActionError |
     NewrPoductsAction | NewProductsActionSuccess | NewProductsActionError |
     SaveProductsAction | SaveProductsActionSuccess | SaveProductsActionError |
-    DeleteProductsAction | DeleteProductsActionSuccess | DeleteProductsActionError
+    DeleteProductsAction | DeleteProductsActionSuccess | DeleteProductsActionError |
+    EditProductsAction | EditProductsActionSuccess | EditProductsActionError
 ;

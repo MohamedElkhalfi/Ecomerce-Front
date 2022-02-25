@@ -23,7 +23,6 @@ export class ProductsComponent implements OnInit {
     this.store.dispatch(new GetAllProductsAction({}));
    }
   ngOnInit(): void {
-    console.log("ngOnInit");
 
     this.productsState$=this.store.pipe(
       map((state)=>  state.catalogState )

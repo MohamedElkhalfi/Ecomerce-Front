@@ -1,7 +1,7 @@
 <tr *ngIf="product">
   <td>{{product.id}}</td>
   <td>{{product.name}}</td>
-  <td>{{product.price}}</td>
+  <td>{{product.currentPrice}}</td>
   <td>{{product.quantity}}</td>
   <td *ngIf="product.selected" class="text-center"><i class="fa fa-check-square-o" aria-hidden="true"></i></td>
   <td *ngIf="!product.selected" class="text-center"><i class="fa fa-ban" aria-hidden="true"></i></td>
@@ -19,7 +19,7 @@
     </button>
 
 
-    <button class="btn btn-success m-1" (click)="onEdit(product?.id!)">
+    <button class="btn btn-success m-1" (click)="onEdit(product.id)">
       <span class="fa fa-edit"></span>
     </button>
   </td>

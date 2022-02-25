@@ -27,7 +27,8 @@ ngOnInit(): void {
     this.route.navigateByUrl("/products");
   }
 
-  onEdit(idProduct: number| null) {
+  onEdit(id: number) {
+    this.route.navigateByUrl("/editProduct/"+id);
 
   }
 }

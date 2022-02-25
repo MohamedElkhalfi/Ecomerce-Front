@@ -27,8 +27,8 @@ getSelectedProducts(product:Product):Observable<Product[]>{
 
 }
 
-deleteProduct(idProduct: Number): Observable<Number> {
-  return this.http.delete<Number>(this.host+"/api/DeleteProductAsync?idProduct="+idProduct);
+deleteProduct(productID: Number): Observable<Number> {
+  return this.http.delete<Number>(this.host+"/api/DeleteProductAsync?productID="+productID);
 
 }
 
@@ -42,5 +42,8 @@ save(product:Product):Observable<Number>{
 
 }
 
-
+getProductById (productID: Number): Observable<Product> {
+  console.log(" save " + JSON.stringify(productID));
+  return this.http.get<Product>(this.host+"/api/FindProductsByIdAsync?productID="+productID);
+}
 }

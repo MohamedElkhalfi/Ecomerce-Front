@@ -9,20 +9,23 @@ export enum ProductsStateEnum{
   ERROR="ERROR",
   INITIAL="INITIAL",
   NEW= "NEW",
-  EDIT="Edit"
+  EDIT="EDIT",
+  UPDATED = "UPDATED"
 }
 
 export interface ProductsState{
   products:Product[],
   errorMessage:string,
-  dataState:ProductsStateEnum
+  dataState:ProductsStateEnum,
+  currentProduct: Product | null
 }
 
 //pour initialiser la state
 const initState:ProductsState={
   products:[],
   errorMessage:"",
-  dataState:ProductsStateEnum.INITIAL
+  dataState:ProductsStateEnum.INITIAL,
+  currentProduct: null
 }
 
 export function productsReducer(state=initState, action:Action):ProductsState {
@@ -73,6 +76,14 @@ export function productsReducer(state=initState, action:Action):ProductsState {
 
     return {...state, dataState:ProductsStateEnum.LOADED }
   case ProductsActionsTypes.DELETE_PRODUCTS_ERROR:
+    return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
+  /* Edit Products*/
+  case ProductsActionsTypes.EDIT_PRODUCTS:
+    return {...state, dataState:ProductsStateEnum.LOADING }
+  case ProductsActionsTypes.EDIT_PRODUCTS_SUCCESS:
+    return {...state, dataState:ProductsStateEnum.LOADED, currentProduct:(<ProductsActions>action).payload   }
+  case ProductsActionsTypes.EDIT_PRODUCTS_ERROR:
     return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
 
     default : return {...state}

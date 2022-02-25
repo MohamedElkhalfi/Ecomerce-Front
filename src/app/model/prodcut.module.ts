@@ -1,7 +1,7 @@
 export interface Product {
   id:number;
   name:string;
-  price:number;
+  currentPrice:number;
   quantity:number;
   selected:boolean;
   available:boolean;

@@ -20,6 +20,7 @@ export class ProductsNavBarComponent implements OnInit {
 
   onGetAllProducts() {
     this.store.dispatch(new GetAllProductsAction({}));
+    this.route.navigateByUrl("/products");
 
   }
   onSearch(f: any) {

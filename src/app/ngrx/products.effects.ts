@@ -5,7 +5,7 @@ import {Action} from '@ngrx/store';
 import { ProductsService } from "../services/products.service";
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 
-import { DeleteProductsActionError, DeleteProductsActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductsActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductsActionError, SaveProductsActionSuccess, SearchProductsActionError, SearchProductsActionSuccess } from "./products.action";
+import { DeleteProductsActionError, DeleteProductsActionSuccess, EditProductsActionError, EditProductsActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductsActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductsActionError, SaveProductsActionSuccess, SearchProductsActionError, SearchProductsActionSuccess } from "./products.action";
 
 @Injectable()
 export class ProductsEffects {
@@ -98,5 +98,19 @@ export class ProductsEffects {
     })
   )
  );
+
+  /* Edit Products*/
+  editProductsEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.EDIT_PRODUCTS),
+      mergeMap((action: ProductsActions)=>{
+        return this.productService.getProductById( action.payload)
+          .pipe(
+            map((products)=> new EditProductsActionSuccess(products)),
+            catchError((err)=>of(new EditProductsActionError(err.message)))
+          )
+      })
+    )
+  );
 
 }
