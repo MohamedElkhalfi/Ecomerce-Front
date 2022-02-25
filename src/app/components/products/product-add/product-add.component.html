@@ -1,16 +1,20 @@
+<div class="p-4">
+
+
 <div class="container" >
 
+  <app-products-nav-bar></app-products-nav-bar>
 <ng-container *ngIf="productFormGroup" >
   <ng-container *ngIf="state as data">
 
-    <ng-container *ngIf="data.dataState == productsStateEnum?.LOADING!">
+    <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADING  ">
       Loading...
     </ng-container>
-    <ng-container *ngIf="data.dataState == productsStateEnum.LOADED">
+    <ng-container *ngIf="data.dataState == ProductsStateEnum.INITIAL">
       Success
 </ng-container  >
 
-<ng-container *ngIf="data.dataState == productsStateEnum.NEW">
+<ng-container *ngIf="data.dataState == ProductsStateEnum.NEW">
 
     <form [formGroup]="productFormGroup" (ngSubmit)="onSaveProduct()">
       <div class="form-group">
@@ -21,6 +25,10 @@
       <div *ngIf="submitted && productFormGroup.controls.name.errors" class="invalid-feedback">
           <div *ngIf="productFormGroup.controls.name.errors.required">Name is Required</div>
         </div>
+      </div>
+      <div class="form-group">
+        <label>Desciption</label>
+        <input type="text" class="form-control" formControlName="description">
       </div>
     <div class="form-group">
       <label>Price</label>
@@ -38,9 +46,10 @@
       <label>Available</label>
       <input type="checkbox" formControlName="available" class="form-check">
     </div>
-    <button class="btn btn-success" (click)="onSaveProduct()">Save</button>
+    <button class="btn btn-success" >Save</button>
   </form>
 </ng-container>
 </ng-container>
 </ng-container>
+</div>
 </div>

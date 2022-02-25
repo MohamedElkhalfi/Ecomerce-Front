@@ -27,13 +27,8 @@ getSelectedProducts(product:Product):Observable<Product[]>{
 
 }
 
-deleteProduct(product: Product): Observable<void> {
-  return this.http.delete<void>(this.host+'/api/DeleteProductAsync/'+product.id, {
-    headers: new HttpHeaders({
-      'Content-Type' : 'application/json'
-    })
-
-  });
+deleteProduct(idProduct: Number): Observable<Number> {
+  return this.http.delete<Number>(this.host+"/api/DeleteProductAsync?idProduct="+idProduct);
 
 }
 
@@ -41,10 +36,11 @@ getProductsByKeyword(keyword: string) : Observable<Product[]> {
   return this.http.get<Product[]>(this.host+"/api/FindProductsByName?keyword="+keyword);
 }
 
-// save(product:Product):Observable<Product>{
-//   let host=environment.host;
-//   return this.http.post<Product>(host+"/products",product);
-// }
+save(product:Product):Observable<Number>{
+  console.log(" save " + JSON.stringify(product));
+  return this.http.post<Number>(this.host+"/api/CreateProducts",product);
+
+}
 
 
 }

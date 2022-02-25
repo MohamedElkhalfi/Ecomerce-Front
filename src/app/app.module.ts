@@ -17,8 +17,6 @@ import { StoreModule } from '@ngrx/store';
 import { productsReducer } from './ngrx/products.reducer';
 import { ProductsEffects } from './ngrx/products.effects';
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
-import { PrdouctItemComponent } from './src/app/components/products/products-list/prdouct-item/prdouct-item.component';
-import { ProductsItemComponent } from './src/app/src/app/components/products/products-list/products-item/products-item.component';
 import { PrdouctsItemComponent } from './components/products/products-list/productsItem/productsItem.component';
 
 

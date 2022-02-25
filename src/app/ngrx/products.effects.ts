@@ -5,7 +5,7 @@ import {Action} from '@ngrx/store';
 import { ProductsService } from "../services/products.service";
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 
-import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductsActionSuccess, ProductsActions, ProductsActionsTypes, SearchProductsActionError, SearchProductsActionSuccess } from "./products.action";
+import { DeleteProductsActionError, DeleteProductsActionSuccess, GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, NewProductsActionSuccess, ProductsActions, ProductsActionsTypes, SaveProductsActionError, SaveProductsActionSuccess, SearchProductsActionError, SearchProductsActionSuccess } from "./products.action";
 
 @Injectable()
 export class ProductsEffects {
@@ -16,8 +16,6 @@ export class ProductsEffects {
     ()=>this.effectActions.pipe(
       ofType(ProductsActionsTypes.GET_ALL_PRODUCTS),
       switchMap  ((action)=>{
-
-
             return this.productService.getAllProducts()
               .pipe(
                 map((products)=> new GetAllProductsActionSuccess(products)),
@@ -65,5 +63,40 @@ export class ProductsEffects {
     })
   )
 );
+
+ /* Save Products*/
+ SaveProductsEffect:Observable<ProductsActions>=createEffect(
+  ()=>this.effectActions.pipe(
+    ofType(ProductsActionsTypes.SAVE_PRODUCTS),
+    mergeMap((action: ProductsActions)=>{
+      return this.productService.save( action.payload)
+        .pipe(
+          map((prodcuts)=> new SaveProductsActionSuccess(prodcuts)),
+          catchError((err)=>of(new SaveProductsActionError(err.message)))
+        )
+    })
+  )
+);
+
+ /* Delete Products*/
+ DeleteProductsEffect:Observable<ProductsActions>=createEffect(
+  ()=>this.effectActions.pipe(
+    ofType(ProductsActionsTypes.DELETE_PRODUCTS),
+    switchMap((action: ProductsActions)=>{
+      return this.productService.deleteProduct( action.payload)
+        .pipe(
+          map((prodcuts)=> new  DeleteProductsActionSuccess(prodcuts)),
+          catchError((err)=>of(new DeleteProductsActionError(err.message)))
+        )
+    }),
+    switchMap  ((action)=>{
+      return this.productService.getAllProducts()
+        .pipe(
+          map((products)=> new GetAllProductsActionSuccess(products)),
+          catchError((err)=>of(new GetAllProductsActionError(err.message)))
+        )
+    })
+  )
+ );
 
 }

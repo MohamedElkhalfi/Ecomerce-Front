@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { delay } from 'rxjs';
 import { Product } from 'src/app/model/prodcut.module';
-import { GetSelectedProductsAction } from 'src/app/ngrx/products.action';
+import { DeleteProductsAction, GetAllProductsAction, GetSelectedProductsAction } from 'src/app/ngrx/products.action';
 
 @Component({
   selector: 'app-productsItem',
@@ -10,7 +12,7 @@ import { GetSelectedProductsAction } from 'src/app/ngrx/products.action';
 })
 export class PrdouctsItemComponent implements OnInit {
   @Input() product:Product|null=null;
-  constructor(private store:Store<any>) { }
+  constructor(private store:Store<any>, private route: Router) { }
 
 ngOnInit(): void {
 }
@@ -20,8 +22,9 @@ ngOnInit(): void {
   }
 
 
-  onDelete(idProduct: number | null) {
-
+  onDelete(idProduct: number ) {
+    this.store.dispatch(new DeleteProductsAction(idProduct));
+    this.route.navigateByUrl("/products");
   }
 
   onEdit(idProduct: number| null) {

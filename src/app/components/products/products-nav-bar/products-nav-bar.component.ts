@@ -28,6 +28,6 @@ export class ProductsNavBarComponent implements OnInit {
 
   onNewProduct()
   {
-this.route.navigateByUrl("/newProduct");
+    this.route.navigateByUrl("/newProduct");
   }
 }

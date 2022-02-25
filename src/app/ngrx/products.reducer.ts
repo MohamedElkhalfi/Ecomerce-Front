@@ -4,11 +4,11 @@ import { ProductsActions, ProductsActionsTypes } from "./products.action";
 
 
 export enum ProductsStateEnum{
-  LOADING="Loading",
-  LOADED="Loaded",
-  ERROR="Error",
-  INITIAL="Initial",
-  NEW= "New",
+  LOADING="LOADING",
+  LOADED="LOADED",
+  ERROR="ERROR",
+  INITIAL="INITIAL",
+  NEW= "NEW",
   EDIT="Edit"
 }
 
@@ -55,6 +55,25 @@ export function productsReducer(state=initState, action:Action):ProductsState {
       return {...state, dataState:ProductsStateEnum.NEW }
     case ProductsActionsTypes.New_PRODUCTS_ERROR:
       return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
+  /* Save Products*/
+  case ProductsActionsTypes.SAVE_PRODUCTS:
+    return {...state, dataState:ProductsStateEnum.LOADING }
+  case ProductsActionsTypes.SAVE_PRODUCTS_SUCCESS:
+  //  let prods: Product[]=[...state.products];
+  //  prods.push((<ProductsActions>action).payload);
+    return {...state, dataState:ProductsStateEnum.LOADED }
+  case ProductsActionsTypes.SAVE_PRODUCTS_ERROR:
+    return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
+  /* Delete Products*/
+  case ProductsActionsTypes.DELETE_PRODUCTS:
+    return {...state, dataState:ProductsStateEnum.LOADING }
+  case ProductsActionsTypes.DELETE_PRODUCTS_SUCCESS:
+
+    return {...state, dataState:ProductsStateEnum.LOADED }
+  case ProductsActionsTypes.DELETE_PRODUCTS_ERROR:
+    return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
 
     default : return {...state}
   }
