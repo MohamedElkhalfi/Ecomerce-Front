@@ -6,7 +6,6 @@ import { Product } from 'src/app/model/prodcut.module';
 import { GetAllProductsAction } from 'src/app/ngrx/products.action';
 import { ProductsState, ProductsStateEnum } from 'src/app/ngrx/products.reducer';
 import { ProductsService } from 'src/app/services/products.service';
-import { AppDataState, DataStateEnum } from '../../state/product.state';
 
 
 @Component({

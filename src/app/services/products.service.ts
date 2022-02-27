@@ -36,14 +36,21 @@ getProductsByKeyword(keyword: string) : Observable<Product[]> {
   return this.http.get<Product[]>(this.host+"/api/FindProductsByName?keyword="+keyword);
 }
 
-save(product:Product):Observable<Number>{
+saveProduct(product:Product):Observable<Number>{
   console.log(" save " + JSON.stringify(product));
   return this.http.post<Number>(this.host+"/api/CreateProducts",product);
 
 }
 
 getProductById (productID: Number): Observable<Product> {
-  console.log(" save " + JSON.stringify(productID));
+  console.log(" getProductById " + JSON.stringify(productID));
   return this.http.get<Product>(this.host+"/api/FindProductsByIdAsync?productID="+productID);
 }
+
+updateProduct(product:Product):Observable<Number>{
+  console.log(" updateProduct " + JSON.stringify(product));
+  return this.http.put<Number>(this.host+"/api/UpdateProductAsync?_ProductID="+product.id,product);
+
+}
+
 }

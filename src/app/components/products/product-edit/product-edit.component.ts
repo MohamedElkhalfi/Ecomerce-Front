@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { EditProductsAction } from 'src/app/ngrx/products.action';
+import { EditProductsAction, NewrPoductsAction, UpdateProductsAction } from 'src/app/ngrx/products.action';
 import { ProductsState, ProductsStateEnum } from 'src/app/ngrx/products.reducer';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -19,10 +19,12 @@ export class ProductEditComponent implements OnInit {
 readonly ProductsStateEnum= ProductsStateEnum ;
 productFormGroup?:FormGroup;
 formBuild: boolean = false;
+submitted: boolean = false;
   constructor(private fb:FormBuilder,
               private productsService:ProductsService,
               private store: Store<any>,
-              private routeActived: ActivatedRoute) {
+              private routeActived: ActivatedRoute,
+              private route: Router) {
                 console.log("id " + routeActived.snapshot.params.id);
 this.productID = +routeActived.snapshot.params.id;
 
@@ -60,6 +62,14 @@ ngOnInit(): void {
 
 
 onEditProduct (){
+this.submitted =  true;
+if(this.productFormGroup.invalid)
+  return;
+ console.log("this.productFormGroup?.value " + JSON.stringify(this.productFormGroup?.value)  );
 
+this.store.dispatch(new UpdateProductsAction(this.productFormGroup?.value));
+this.route.navigateByUrl("/products");
 }
+
+
 }

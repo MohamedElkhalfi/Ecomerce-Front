@@ -73,7 +73,6 @@ export function productsReducer(state=initState, action:Action):ProductsState {
   case ProductsActionsTypes.DELETE_PRODUCTS:
     return {...state, dataState:ProductsStateEnum.LOADING }
   case ProductsActionsTypes.DELETE_PRODUCTS_SUCCESS:
-
     return {...state, dataState:ProductsStateEnum.LOADED }
   case ProductsActionsTypes.DELETE_PRODUCTS_ERROR:
     return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
@@ -84,6 +83,14 @@ export function productsReducer(state=initState, action:Action):ProductsState {
   case ProductsActionsTypes.EDIT_PRODUCTS_SUCCESS:
     return {...state, dataState:ProductsStateEnum.LOADED, currentProduct:(<ProductsActions>action).payload   }
   case ProductsActionsTypes.EDIT_PRODUCTS_ERROR:
+    return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+
+   /* Update Products*/
+   case ProductsActionsTypes.UPDATE_PRODUCTS:
+    return {...state, dataState:ProductsStateEnum.LOADING }
+  case ProductsActionsTypes.UPDATE_PRODUCTS_SUCCESS:
+    return {...state, dataState:ProductsStateEnum.LOADED  }
+  case ProductsActionsTypes.UPDATE_PRODUCTS_ERROR:
     return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
 
     default : return {...state}

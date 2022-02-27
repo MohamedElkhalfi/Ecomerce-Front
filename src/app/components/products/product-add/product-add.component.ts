@@ -47,6 +47,9 @@ state: ProductsState | null= null;
 
 
   onSaveProduct() {
+    this.submitted =  true;
+    if(this.productFormGroup.invalid)
+      return;
     this.store.dispatch(new SaveProductsAction(this.productFormGroup.value));
     this.store.dispatch(new GetAllProductsAction({}));
     this.route.navigateByUrl("/products");
