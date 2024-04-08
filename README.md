@@ -1,6 +1,7 @@
 # EcommerceFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2+ Ngrx
+Ce projet a été développé avec Angular version 13.2.2 et utilise Ngrx.
+ 
 
 ## Development server
 
