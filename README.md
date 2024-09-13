@@ -1,6 +1,6 @@
 # EcommerceFront
 
-Ce projet a été développé avec Angular version 13.2.2 et utilise Ngrx.
+Le projet a été développé avec Angular 13.2.2 et utilise NgRx pour la gestion de l'état
  
 
 ## Development server
